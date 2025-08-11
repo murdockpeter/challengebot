@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  challengebot:
+    build: .
+    container_name: challengebot
+    restart: unless-stopped
+    environment:
+      # Discord Configuration
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+      - DISCORD_GUILD_ID=${DISCORD_GUILD_ID}
+      
+      # Firebase Configuration
+      - FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
+      - FIREBASE_PRIVATE_KEY_ID=${FIREBASE_PRIVATE_KEY_ID}
+      - FIREBASE_PRIVATE_KEY=${FIREBASE_PRIVATE_KEY}
+      - FIREBASE_CLIENT_EMAIL=${FIREBASE_CLIENT_EMAIL}
+      - FIREBASE_CLIENT_ID=${FIREBASE_CLIENT_ID}
+      - FIREBASE_AUTH_URI=${FIREBASE_AUTH_URI:-https://accounts.google.com/o/oauth2/auth}
+      - FIREBASE_TOKEN_URI=${FIREBASE_TOKEN_URI:-https://oauth2.googleapis.com/token}
+      - FIREBASE_AUTH_PROVIDER_X509_CERT_URL=${FIREBASE_AUTH_PROVIDER_X509_CERT_URL:-https://www.googleapis.com/oauth2/v1/certs}
+      - FIREBASE_CLIENT_X509_CERT_URL=${FIREBASE_CLIENT_X509_CERT_URL}
+    volumes:
+      - bot_logs:/app/logs
+    networks:
+      - challengebot_network
+
+volumes:
+  bot_logs:
+
+networks:
+  challengebot_network:
+    driver: bridge
