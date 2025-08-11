@@ -8,12 +8,18 @@ class ChallengeDatabase:
     def __init__(self):
         """Initialize Firebase connection and Firestore client"""
         try:
+            # Debug private key format
+            private_key = config.FIREBASE_PRIVATE_KEY
+            print(f"Private key starts with: {private_key[:50] if private_key else 'None'}...")
+            print(f"Private key ends with: ...{private_key[-50:] if private_key else 'None'}")
+            print(f"Private key length: {len(private_key) if private_key else 0}")
+            
             # Initialize Firebase with service account
             cred = credentials.Certificate({
                 "type": "service_account",
                 "project_id": config.FIREBASE_PROJECT_ID,
                 "private_key_id": config.FIREBASE_PRIVATE_KEY_ID,
-                "private_key": config.FIREBASE_PRIVATE_KEY,
+                "private_key": private_key,
                 "client_email": config.FIREBASE_CLIENT_EMAIL,
                 "client_id": config.FIREBASE_CLIENT_ID,
                 "auth_uri": config.FIREBASE_AUTH_URI,
