@@ -39,7 +39,7 @@ class ChallengeCommands(commands.Cog):
         self.db = bot.db
 
     @commands.command(name='challenge')
-    async def challenge(self, ctx, opponent: discord.Member, game: str):
+    async def challenge(self, ctx, opponent: discord.Member, *, game: str):
         """Challenge another player to a board game"""
         if opponent.bot:
             await ctx.send("❌ You cannot challenge a bot!")
